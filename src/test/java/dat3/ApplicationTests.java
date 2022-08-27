@@ -1,13 +1,14 @@
 package dat3;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-@SpringBootTest
+@DataJpaTest
 class ApplicationTests {
-
-    @Test
+    /*@Test
     void contextLoads() {
     }
+
+     */
 
 }

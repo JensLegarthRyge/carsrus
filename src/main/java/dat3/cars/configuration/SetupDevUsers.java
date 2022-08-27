@@ -1,5 +1,9 @@
-package dat3.rename_me.configuration;
+package dat3.cars.configuration;
 
+import dat3.cars.entity.Car;
+import dat3.cars.entity.Member;
+import dat3.cars.repository.CarRepository;
+import dat3.cars.repository.MemberRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -7,20 +11,54 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Controller
 public class SetupDevUsers implements ApplicationRunner {
 
+
     UserWithRolesRepository userWithRolesRepository;
+    MemberRepository memberRepository;
+    CarRepository carRepository;
     String passwordUsedByAll;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, MemberRepository memberRepository, CarRepository carRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
+        this.memberRepository = memberRepository;
+        this.carRepository = carRepository;
         passwordUsedByAll = "test12";
+
     }
 
     @Override
     public void run(ApplicationArguments args) {
-        setupUserWithRoleUsers();
+        ArrayList<Car> carsArray = new ArrayList<>(Arrays.asList(
+                new Car ("Ford","Fiesta",400,50),
+                new Car ("Mazda","Miata",550,40),
+                new Car ("Volkswagen","Golf VII",699,30)
+        )
+        );
+
+        ArrayList<Member> membersArray = new ArrayList<>(Arrays.asList(
+                new Member("caravaggio","jens.l.ryge@pol.dk","hejjegersej123","Jens",
+                        "Legarth Ryge","Valgaardsvej 7, 2 TH","Valby","2500",true,"first?"
+                ),
+                new Member("hrforsting","johaforsting@gmail.com","elskeralt","Johannes",
+                        "Forsting","Vetintagade 39, 1 MF","Frederiksberg","2000",false,"second?"
+                ),
+                new Member("mbhnielsenxluna","mbhxnielsen@gmail.com","cookieluna123","Mads",
+                        "Bøgh Højer Nielsen","Nokevej 1C, 5 TH","København N","2200",false,"third?"
+                )
+        )
+        );
+        for (Member cm:membersArray) {
+            memberRepository.save(cm);
+        }
+
+        for (Car cc:carsArray) {
+            carRepository.save(cc);
+        }
     }
 
     /*****************************************************************************************
