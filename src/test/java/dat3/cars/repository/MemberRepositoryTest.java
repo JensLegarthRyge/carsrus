@@ -21,10 +21,10 @@ class MemberRepositoryTest {
     public static void initializeData(@Autowired MemberRepository memberRepository){
         ArrayList<Member> membersArray = new ArrayList<>(Arrays.asList(
                 new Member("caravaggio","jens.l.ryge@pol.dk","hejjegersej123","Jens",
-                        "Legarth Ryge","Valgaardsvej 7, 2 TH","Valby","2500",true,"first?"
+                        "Legarth Ryge","Valgaardsvej 7, 2 TH","Valby","2500",true,1
                 ),
                 new Member("hrforsting","johaforsting@gmail.com","elskeralt","Johannes",
-                        "Forsting","Vetintagade 39, 1 MF","Frederiksberg","2000",false,"second?"
+                        "Forsting","Vetintagade 39, 1 MF","Frederiksberg","2000",false,2
                 )
             )
         );

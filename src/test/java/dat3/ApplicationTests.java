@@ -5,10 +5,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
 class ApplicationTests {
-    /*@Test
+    @Test
     void contextLoads() {
     }
-
-     */
-
 }

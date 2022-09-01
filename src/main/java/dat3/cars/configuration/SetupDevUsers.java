@@ -42,18 +42,20 @@ public class SetupDevUsers implements ApplicationRunner {
 
         ArrayList<Member> membersArray = new ArrayList<>(Arrays.asList(
                 new Member("caravaggio","jens.l.ryge@pol.dk","hejjegersej123","Jens",
-                        "Legarth Ryge","Valgaardsvej 7, 2 TH","Valby","2500",true,"first?"
+                        "Legarth Ryge","Valgaardsvej 7, 2 TH","Valby","2500",true,1
                 ),
                 new Member("hrforsting","johaforsting@gmail.com","elskeralt","Johannes",
-                        "Forsting","Vetintagade 39, 1 MF","Frederiksberg","2000",false,"second?"
+                        "Forsting","Vetintagade 39, 1 MF","Frederiksberg","2000",false,2
                 ),
                 new Member("mbhnielsenxluna","mbhxnielsen@gmail.com","cookieluna123","Mads",
-                        "Bøgh Højer Nielsen","Nokevej 1C, 5 TH","København N","2200",false,"third?"
+                        "Bøgh Højer Nielsen","Nokevej 1C, 5 TH","København N","2200",false,3
                 )
         )
         );
         for (Member cm:membersArray) {
+            System.out.println(cm);
             memberRepository.save(cm);
+            System.out.println("\n\n done deal \n\n");
         }
 
         for (Car cc:carsArray) {
