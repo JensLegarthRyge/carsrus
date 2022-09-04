@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/members")
+@RequestMapping("api/cars")
 public class MemberController {
 
     public MemberController(MemberService memberService) {
@@ -32,7 +32,7 @@ public class MemberController {
         return memberService.findMemberByUsername(username);
     }
 
-    //Security --> USER ??????
+    //Security USER ??????
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     //@PostMapping // same as above when you are using @RestController
     MemberResponse addMember(@RequestBody MemberRequest body){

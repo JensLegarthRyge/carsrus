@@ -15,24 +15,26 @@ import java.util.List;
 @RestController
 @RequestMapping("api/cars")
 public class CarController {
-    
+
     CarService carService;
 
     public CarController(CarService carService) {
         this.carService = carService;
     }
 
+    //Security ADMIN ???
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    //@PostMapping // same as above when you are using @RestController
     CarResponse addCar(@RequestBody CarRequest body){
         return carService.addCar(body);
     }
 
+    //Security USER ???
     @GetMapping
-    List<CarResponse> getMembers(){
+    List<CarResponse> getCars(){
         return carService.getAllCars();
     }
 
+    //Security USER ???
     @GetMapping(path = "/{id}")
     CarResponse getCarById(@PathVariable Integer id) throws Exception {
         return carService.getCarById(id);

@@ -24,9 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 class MemberServiceMockWithH2Test {
 
-    public  MemberService memberService;
+    public MemberService memberService;
 
-    public  static MemberRepository memberRepository;
+    public static MemberRepository memberRepository;
 
     @BeforeAll
     public static void setupData(@Autowired MemberRepository member_Repository){
@@ -55,10 +55,8 @@ class MemberServiceMockWithH2Test {
 
     @Test
     void editMember() throws Exception {
-        //Create a member, just as a quick way to get a MemberRequest --> Observe new address for m1
         MemberRequest request = new MemberRequest(new Member("m1", "pw", "m1@a.dk", "aa", "aaa", "xxxx", "yyyy", "2000"));
         memberService.editMember(request,"m1");
-        //find m1 and verify that address has been changed
         MemberResponse response = memberService.findMemberByUsername("m1");
         assertEquals("xxxx", response.getStreet());
         assertEquals("yyyy", response.getCity());
@@ -69,7 +67,6 @@ class MemberServiceMockWithH2Test {
     void getMembers() {
         List<MemberResponse> response = memberService.getMembers();
         assertEquals(4,response.size());
-        //assertThat(response, containsInAnyOrder(hasProperty("email", is("m1@a.dk")), hasProperty("email", is("mm@a.dk"))));
     }
 
     @Test
@@ -87,9 +84,5 @@ class MemberServiceMockWithH2Test {
     void deleteByUsername() {
         memberRepository.deleteById("m1");
         assertEquals(3,memberRepository.count());
-    }
-
-    @Test
-    void setRankingForUser() {
     }
 }

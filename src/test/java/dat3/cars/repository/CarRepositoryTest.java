@@ -20,7 +20,6 @@ class CarRepositoryTest {
 
     @BeforeAll
     public static void initializeData(@Autowired CarRepository carRepository) {
-
         ArrayList<Car> carsArray = new ArrayList<>(Arrays.asList(
                 new Car("Ford", "Fiesta", 400, 50),
                 new Car("Mazda", "Miata", 550, 40),

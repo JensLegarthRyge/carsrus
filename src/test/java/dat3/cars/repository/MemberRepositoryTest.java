@@ -41,4 +41,10 @@ class MemberRepositoryTest {
         assertEquals(memberUsernames.get(0), found.getUsername());
         assertEquals("caravaggio",found.getUsername());
     }
+
+    @Test
+    public void testDeleteMemberById(){
+        memberRepository.deleteById(memberUsernames.get(0));
+        assertEquals(memberRepository.count(),1);
+    }
 }
