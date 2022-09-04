@@ -55,7 +55,6 @@ public class SetupDevUsers implements ApplicationRunner {
         for (Member cm:membersArray) {
             System.out.println(cm);
             memberRepository.save(cm);
-            System.out.println("\n\n done deal \n\n");
         }
 
         for (Car cc:carsArray) {
