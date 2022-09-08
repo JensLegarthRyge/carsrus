@@ -28,7 +28,7 @@ public class MemberResponse {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime edited;
     Integer ranking;
-    List<ReservationResponse> reservationResponses = new ArrayList<>();
+    List<ReservationResponse> reservationResponses;
 
     //Convert Member Entity to Member DTO
     public MemberResponse(Member m, boolean includeAll) {
@@ -44,6 +44,8 @@ public class MemberResponse {
             this.edited = m.getEdited();
             this.ranking = m.getRanking();
         }
-        this.reservationResponses = m.getReservations().stream().map(ReservationResponse::new).collect(Collectors.toList());
+        if(!m.getReservations().isEmpty()){
+            this.reservationResponses = m.getReservations().stream().map(ReservationResponse::new).collect(Collectors.toList());
+        }
     }
 }
