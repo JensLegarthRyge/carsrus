@@ -6,8 +6,10 @@ import dat3.cars.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -26,6 +28,7 @@ public class MemberResponse {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
     LocalDateTime edited;
     Integer ranking;
+    List<ReservationResponse> reservationResponses = new ArrayList<>();
 
     //Convert Member Entity to Member DTO
     public MemberResponse(Member m, boolean includeAll) {
@@ -41,5 +44,6 @@ public class MemberResponse {
             this.edited = m.getEdited();
             this.ranking = m.getRanking();
         }
+        this.reservationResponses = m.getReservations().stream().map(ReservationResponse::new).collect(Collectors.toList());
     }
 }

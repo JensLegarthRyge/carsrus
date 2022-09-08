@@ -2,8 +2,10 @@ package dat3.cars.configuration;
 
 import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
+import dat3.cars.entity.Reservation;
 import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRepository;
+import dat3.cars.repository.ReservationRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -11,6 +13,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import dat3.security.repository.UserWithRolesRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,12 +24,14 @@ public class SetupDevUsers implements ApplicationRunner {
     UserWithRolesRepository userWithRolesRepository;
     MemberRepository memberRepository;
     CarRepository carRepository;
+    ReservationRepository reservationRepository;
     String passwordUsedByAll;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, MemberRepository memberRepository, CarRepository carRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, MemberRepository memberRepository, CarRepository carRepository, ReservationRepository reservationRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
         this.memberRepository = memberRepository;
         this.carRepository = carRepository;
+        this.reservationRepository = reservationRepository;
         passwordUsedByAll = "test12";
 
     }
@@ -52,14 +57,30 @@ public class SetupDevUsers implements ApplicationRunner {
                 )
         )
         );
-        for (Member cm:membersArray) {
-            System.out.println(cm);
-            memberRepository.save(cm);
-        }
+        ArrayList<Reservation> reservationsArray = new ArrayList<>(Arrays.asList(
+                new Reservation(LocalDate.of(2022,9,5), carsArray.get(0),membersArray.get(0)),
+                new Reservation(LocalDate.of(2022,9,6), carsArray.get(0),membersArray.get(0)),
+                new Reservation(LocalDate.of(2022,9,7), carsArray.get(0),membersArray.get(0))
+        )
+        );
 
-        for (Car cc:carsArray) {
-            carRepository.save(cc);
-        }
+        membersArray.get(0).addReservation(reservationsArray.get(0));
+        membersArray.get(0).addReservation(reservationsArray.get(1));
+        membersArray.get(0).addReservation(reservationsArray.get(2));
+
+
+        carRepository.save(carsArray.get(0));
+        carRepository.save(carsArray.get(1));
+        carRepository.save(carsArray.get(2));
+        memberRepository.save(membersArray.get(0));
+        memberRepository.save(membersArray.get(1));
+        memberRepository.save(membersArray.get(2));
+        reservationRepository.save(reservationsArray.get(0));
+        reservationRepository.save(reservationsArray.get(1));
+        reservationRepository.save(reservationsArray.get(2));
+
+
+
     }
 
     /*****************************************************************************************

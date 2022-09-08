@@ -8,6 +8,9 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "members")
 @Getter
@@ -23,6 +26,13 @@ public class Member extends UserWithRoles {
     private String zip;
     private boolean approved;
     private int ranking;
+    @OneToMany(mappedBy = "member")
+    private List<Reservation> reservations = new ArrayList<>();
+
+    public void addReservation(Reservation res){
+        reservations.add(res);
+        res.setMember(this);
+    }
 
     public Member(String username, String email, String password, String firstName, String lastName, String street, String city, String zip, boolean approved, int ranking) {
         super(username, password, email);
