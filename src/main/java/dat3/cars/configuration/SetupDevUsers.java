@@ -39,6 +39,7 @@ public class SetupDevUsers implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+
         ArrayList<Car> carsArray = new ArrayList<>(Arrays.asList(
                 new Car ("Ford","Fiesta",400,50),
                 new Car ("Mazda","Miata",550,40),
@@ -79,8 +80,7 @@ public class SetupDevUsers implements ApplicationRunner {
         reservationRepository.save(reservationsArray.get(0));
         reservationRepository.save(reservationsArray.get(1));
         reservationRepository.save(reservationsArray.get(2));
-
-
+        
 
     }
 

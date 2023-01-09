@@ -47,6 +47,8 @@ public class CarService {
         carToEdit.setBrand(body.getBrand());
         carToEdit.setModel(body.getModel());
         carToEdit.setBestDiscount(body.getBestDiscount());
+
+        carRepository.save(carToEdit);
     }
 
     public void deleteCarById(Integer id){
